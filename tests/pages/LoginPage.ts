@@ -1,0 +1,113 @@
+import {BasePage} from "@pages/BasePage";
+import {expect} from "@playwright/test";
+
+export class LoginPage extends BasePage {
+
+    // -- Locators -----------------------------------------------------------------
+    private get country() {
+        return this.page.getByRole('combobox')
+    }
+
+    get individualTypeCheckbox() {
+        return this.page.getByText('Individual person')
+    }
+
+    private get emailInput() {
+        return this.page.getByLabel('Email');
+    }
+
+    private get passwordInput() {
+        return this.page.locator('[name="password"]');
+    }
+
+    private get signInButton() {
+        return this.page.getByRole('button', {name: 'Sign in'});
+    }
+
+    private get signUpButton() {
+        return this.page.getByRole('button', {name: 'Sign up'});
+    }
+
+    private get repeatPasswordButton() {
+        return this.page.locator('#repeatPassword');
+    }
+
+    private get needAccountButton() {
+        return this.page.getByRole('button', {name: 'Need an account?'})
+    }
+
+    private get termsAndConditionsCheckbox() {
+        return this.page.locator('#terms_check')
+    }
+
+    private get GDPRCheckbox() {
+        return this.page.locator('#gdpr_check')
+    }
+
+    private get logOutButton() {
+        return this.page.locator('.log-out')
+    }
+
+    // -- Actions -----------------------------------------------------------------
+
+    //given the user is on Sign up view
+    async givenUserIsOnSignUpPage() {
+        await this.goto('/sign-in')
+        await this.needAccountButton.click()
+        await expect(this.page).toHaveTitle('Sign up');
+    }
+
+    async whenUserEntersThisCountry(country: string) {
+        await this.country.fill(country)
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.keyboard.press('Enter');
+    }
+
+    async whenTheUserChecksIndividualType() {
+        await this.individualTypeCheckbox.click()
+    }
+
+    //when the user fills in its data and accepts conditions and GDPR
+    async whenUserFillsInSignUpForm(email: string, password: string) {
+        await this.emailInput.fill(email);
+        await this.passwordInput.fill(password);
+        await this.repeatPasswordButton.fill(password)
+        await this.termsAndConditionsCheckbox.click()
+        await this.GDPRCheckbox.click()
+    }
+
+    //when the user click button Sign up
+    async whenTheUserClicksButtonSignUp() {
+        await this.signUpButton.click()
+    }
+
+    async thenTheUserIsOnDashboardPage() {
+        await this.waitForPageLoad()
+        await this.waitForUrl('**/home')
+    }
+
+    //given the user is on Sign in view
+    async givenUserIsOnSignInPage() {
+        await this.navigate("'/sign-in'")
+        await expect(this.page).toHaveTitle("Sign in")
+    }
+
+    //when the user fills in its login credentials and click Sign in button
+    async whenUserFillsInSignInForm(email: string, password: string) {
+        await this.emailInput.fill(email);
+        await this.passwordInput.fill(password);
+    }
+
+    async whenTheUserClicksSignInButton() {
+        await this.signInButton.click()
+    }
+
+    async whenTheUserLogsOutFromDashboard() {
+        await this.logOutButton.click()
+    }
+
+    async thenTheUserIsOnSignInPage() {
+        await this.page.waitForURL('**/sign-in');
+        await expect(this.page).toHaveTitle('Sign in');
+    }
+}

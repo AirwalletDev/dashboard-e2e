@@ -1,0 +1,10 @@
+.env              real secrets — your local values, never committed to Git
+.env.example      template — committed to Git, shows what variables exist
+.env.staging      staging environment values — committed or kept private
+.env.production   production values — usually kept very private
+
+add to .gitignore
+.env
+.env.local
+.env.staging
+.env.production
