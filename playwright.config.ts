@@ -17,6 +17,12 @@ export default defineConfig({
         screenshot: 'on',
         video: 'on',
         headless: false,
+
+        //maximise browser
+        viewport: null,
+        launchOptions: {
+            args: ['--start-maximized'],
+        },
     },
 
     projects: [

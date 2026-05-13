@@ -13,6 +13,10 @@ export class HomePage extends BasePage {
         return this.page.locator('h1.welcome-title');
     }
 
+    private get burgerIcon(){
+        return this.page.getByRole('main').getByRole('img', { name: 'Burger Icon' })
+    }
+
     // -- Actions -----------------------------------------------------------------
 
     async thenTheUserIsOnDashboardPage() {
@@ -27,6 +31,10 @@ export class HomePage extends BasePage {
     async thenTheWelcomeMessagesIsShown(message: string) {
         const actualText = await this.textMessage.textContent()
         expect(actualText).toBe(message);
+    }
+
+    async whenUserClicksMenuBurgerIcon(){
+        await this.burgerIcon.click()
     }
 
 }

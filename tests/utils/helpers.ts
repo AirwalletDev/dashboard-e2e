@@ -15,7 +15,7 @@ export function generateUser(): DashboardUser {
     return {
         firstName,
         lastName,
-        email: `${firstName}.${lastName}.${Date.now()}@testmail.com`.toLowerCase(),
+        email: `${firstName}.${lastName}@testmail${Date.now()}.com`.toLowerCase(),
         password: 'Airwallet2026!',
     };
 }
