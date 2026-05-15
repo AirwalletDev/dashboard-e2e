@@ -50,25 +50,28 @@ export class LoginPage extends BasePage {
 
     // -- Actions -----------------------------------------------------------------
 
-    //given the user is on Sign up view
     async givenUserIsOnSignUpPage() {
+        console.log('Given the user is on Sign up page');
         await this.goto('/sign-in')
         await this.needAccountButton.click()
         await expect(this.page).toHaveTitle('Sign up');
     }
 
     async whenUserEntersThisCountry(country: string) {
+        console.log(`When user enters this country for country: ${country}`);
         await this.country.fill(country)
         await this.page.keyboard.press('ArrowDown');
         await this.page.keyboard.press('Enter');
     }
 
     async whenTheUserChecksIndividualType() {
+        console.log('When user click button to check individual type');
         await this.individualTypeCheckbox.click()
     }
 
     //when the user fills in its data and accepts conditions and GDPR
     async whenUserFillsInSignUpForm(email: string, password: string) {
+        console.log(`When user fills in signup for email: ${email} and password: ${password}`);
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.repeatPasswordButton.fill(password)
@@ -76,37 +79,41 @@ export class LoginPage extends BasePage {
         await this.GDPRCheckbox.click()
     }
 
-    //when the user click button Sign up
     async whenTheUserClicksButtonSignUp() {
+        console.log('When user clicks Sign up button');
         await this.signUpButton.click()
     }
 
     async thenTheUserIsOnDashboardPage() {
+        console.log('Then the user is on dashboard');
         await this.waitForPageLoad()
         await this.waitForUrl('**/home')
     }
 
-    //given the user is on Sign in view
     async givenUserIsOnSignInPage() {
+        console.log('Given the user is on Sign in page');
         await this.navigate("'/sign-in'")
         await expect(this.page).toHaveTitle("Sign in")
     }
 
-    //when the user fills in its login credentials and click Sign in button
     async whenUserFillsInSignInForm(email: string, password: string) {
+        console.log(`When user fills in sign in form with email: ${email} and password: ${password}`);
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
     }
 
     async whenTheUserClicksSignInButton() {
+        console.log('When user clicks Sign in button');
         await this.signInButton.click()
     }
 
     async whenTheUserLogsOutFromDashboard() {
+        console.log('When user clicks Log out button');
         await this.logOutButton.click()
     }
 
     async thenTheUserIsOnSignInPage() {
+        console.log('Then the user is on Sign in page');
         await this.page.waitForURL('**/sign-in');
         await expect(this.page).toHaveTitle('Sign in');
     }

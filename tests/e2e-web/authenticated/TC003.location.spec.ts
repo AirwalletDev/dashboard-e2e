@@ -3,10 +3,6 @@ import {HomePage} from "@pages/HomePage";
 import {LocationPage} from "@pages/LocationPage";
 import {dismissModalIfPresent} from "@utils/helpers";
 
-const setupUserAuth = "tests/setup/.state/user.json";
-
-//Load the auth state saved by setup in state
-test.use({storageState: setupUserAuth});
 test('Location creation workflow', async ({page}) => {
 
     const homePage = new HomePage(page);
@@ -16,6 +12,7 @@ test('Location creation workflow', async ({page}) => {
         await homePage.givenUserIsOnHomePage();
         await dismissModalIfPresent(page);
         await homePage.whenUserClicksMenuItemLocation();
+        await locationPage.whenTheUserClosesChatButton();
         await locationPage.thenTheUserIsOnLocationPage();
         await locationPage.whenUserClicksButtonNewLocation();
     })

@@ -11,13 +11,12 @@ test('User can successfully log out from Airwallet dashboard', async ({page}) =>
         lastName: '',
         email: 'zinajda+44@airwallet.net',
         password: 'Airwallet2026!'
-    };
+    };//todo move this to .env.sandbox
     await loginPage.givenUserIsOnSignInPage();
     await loginPage.whenUserFillsInSignInForm(staticUser.email, staticUser.password);
     await loginPage.whenTheUserClicksSignInButton();
     await dismissModalIfPresent(page);
     await loginPage.thenTheUserIsOnDashboardPage();
-    // await homePage.whenUserClicksMenuBurgerIcon()
     await loginPage.whenTheUserLogsOutFromDashboard();
     await loginPage.thenTheUserIsOnSignInPage();
 })
