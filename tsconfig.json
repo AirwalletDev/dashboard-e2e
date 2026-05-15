@@ -5,18 +5,9 @@
     "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
-    "types": ["node"],
-    "baseUrl": ".",
     "paths": {
-      "@pages/*":    ["tests/pages/*"],
-      "@fixtures/*": ["tests/fixtures/*"],
-      "@utils/*":    ["tests/utils/*"],
-      "@data/*":     ["tests/data/*"]
+      "@pages/*": ["tests/pages/*"],
+      "@utils/*": ["tests/utils/*"]
     }
-  },
-  "include": [
-    "tests/**/*.ts",
-    "playwright.config.ts",
-    "tests/auth.setup.ts"
-  ]
+  }
 }
