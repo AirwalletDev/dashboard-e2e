@@ -3,7 +3,7 @@ import {LoginPage} from "@pages/LoginPage";
 import {DashboardUser, dismissModalIfPresent} from "@utils/helpers";
 import {HomePage} from "@pages/HomePage";
 
-test('New user can successfully log in and out from Airwallet dashboard', async ({page}) => {
+test('User can successfully log out from Airwallet dashboard', async ({page}) => {
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
     const staticUser: DashboardUser = {
@@ -15,9 +15,9 @@ test('New user can successfully log in and out from Airwallet dashboard', async 
     await loginPage.givenUserIsOnSignInPage();
     await loginPage.whenUserFillsInSignInForm(staticUser.email, staticUser.password);
     await loginPage.whenTheUserClicksSignInButton();
-    await loginPage.thenTheUserIsOnDashboardPage();
     await dismissModalIfPresent(page);
-    await homePage.whenUserClicksMenuBurgerIcon()
+    await loginPage.thenTheUserIsOnDashboardPage();
+    // await homePage.whenUserClicksMenuBurgerIcon()
     await loginPage.whenTheUserLogsOutFromDashboard();
     await loginPage.thenTheUserIsOnSignInPage();
 })
