@@ -5,6 +5,7 @@
     "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
+    "types": ["node", "@playwright/test"],
     "paths": {
       "@pages/*": ["tests/pages/*"],
       "@utils/*": ["tests/utils/*"]

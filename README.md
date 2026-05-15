@@ -9,6 +9,7 @@ End-to-end tests for the Airwallet dashboard, written in [Playwright](https://pl
 - Node.js `v18` or higher
 - Google Chrome installed
 - Access to an Airwallet environment (sandbox / staging)
+- `@types/node` installed (included in `npm install`)
 
 ---
 

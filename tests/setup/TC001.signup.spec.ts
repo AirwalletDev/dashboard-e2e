@@ -1,9 +1,13 @@
 import {test} from "@playwright/test";
 import {dismissModalIfPresent, generateUser} from "@utils/helpers";
 import {LoginPage} from "@pages/LoginPage";
-import fs from "fs";
-import path from "path";
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+import fs from 'node:fs';
 import {HomePage} from "@pages/HomePage";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const setupUserDir = path.join(__dirname, ".state");
 const setupUserAuth = path.join(__dirname, '.state/user.json')
