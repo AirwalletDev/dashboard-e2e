@@ -16,9 +16,7 @@ export default defineConfig({
         trace: 'retain-on-failure',
         screenshot: 'on',
         video: 'on',
-        headless: false,
-
-        //maximise browser
+        headless: true,
         viewport: null,
         launchOptions: {
             args: ['--start-maximized'],
@@ -26,13 +24,17 @@ export default defineConfig({
     },
 
     projects: [
-        {name: 'setup', testMatch: '**/global.setup.ts'},
+        {name: 'setup', testMatch: 'setup/TC001.signup.spec.ts'},
         {
-            name: 'e2e-chrome-tests',
-            use: {
-                ...devices['Desktop Chrome'],
-            },
-            dependencies: ['setup'],
+            name: 'independent-tests',
+            testMatch: '/e2e-web/independent/**',
+            // no dependencies, no storageState — uses its own static user
+        },
+
+        {
+            name: 'e2e-chrome-tests', testMatch: '/e2e-web/authenticated/**', dependencies: ['setup'],
+            use:{ storageState: 'tests/setup/.state/user.json' },
+            //authentication dependency, use storageState to obtain token
         },
     ],
 });
