@@ -5,7 +5,6 @@ import {HomePage} from "@pages/HomePage";
 
 test('User can successfully log out from Airwallet dashboard', async ({page}) => {
     const loginPage = new LoginPage(page);
-    const homePage = new HomePage(page);
     const staticUser: DashboardUser = {
         firstName: '',
         lastName: '',
@@ -20,5 +19,4 @@ test('User can successfully log out from Airwallet dashboard', async ({page}) =>
     await loginPage.whenTheUserLogsOutFromDashboard();
     await loginPage.thenTheUserIsOnSignInPage();
 })
-
 

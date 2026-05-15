@@ -1,6 +1,8 @@
 import {defineConfig, devices} from '@playwright/test';
+import {config} from "dotenv";
 
-require('dotenv').config({path: `.env.${process.env.ENV ?? 'sandbox'}`});
+
+config({path: `.env.${process.env.ENV ?? 'sandbox'}`});
 
 export default defineConfig({
     testDir: './tests',
@@ -16,7 +18,7 @@ export default defineConfig({
         trace: 'retain-on-failure',
         screenshot: 'on',
         video: 'on',
-        headless: true,
+        headless: false,
         viewport: null,
         launchOptions: {
             args: ['--start-maximized'],
@@ -33,7 +35,7 @@ export default defineConfig({
 
         {
             name: 'e2e-chrome-tests', testMatch: '/e2e-web/authenticated/**', dependencies: ['setup'],
-            use:{ storageState: 'tests/setup/.state/user.json' },
+            use: {storageState: 'tests/setup/.state/user.json'},
             //authentication dependency, use storageState to obtain token
         },
     ],

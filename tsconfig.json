@@ -5,10 +5,24 @@
     "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
-    "types": ["node", "@playwright/test"],
+    "types": [
+      "node",
+      "@playwright/test"
+    ],
+    "baseUrl": ".",
     "paths": {
-      "@pages/*": ["tests/pages/*"],
-      "@utils/*": ["tests/utils/*"]
+      "@pages/*": [
+        "tests/pages/*"
+      ],
+      "@utils/*": [
+        "tests/utils/*"
+      ],
+      "@data/*": [
+        "tests/data/*"
+      ],
+      "@setup/*": [
+        "tests/setup/*"
+      ]
     }
   }
 }
