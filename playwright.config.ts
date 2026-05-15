@@ -16,7 +16,7 @@ export default defineConfig({
         trace: 'retain-on-failure',
         screenshot: 'on',
         video: 'on',
-        headless: true,
+        headless: false,
         viewport: null,
         launchOptions: {
             args: ['--start-maximized'],
