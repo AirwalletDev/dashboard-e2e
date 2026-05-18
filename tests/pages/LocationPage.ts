@@ -1,5 +1,5 @@
-import {BasePage} from "@pages/BasePage";
 import {expect, Page} from "@playwright/test";
+import {BasePage} from "@pages/BasePage.js";
 
 export class LocationPage extends BasePage {
     constructor(page: Page) {

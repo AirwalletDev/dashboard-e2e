@@ -1,8 +1,9 @@
 import {test} from "@playwright/test";
-import {dismissModalIfPresent, generateUser} from "@utils/helpers";
 import fs from 'node:fs';
-import {LoginPage} from "@pages/LoginPage";
-import {HomePage} from "@pages/HomePage";
+import {dismissModalIfPresent, generateUser} from "@utils/helpers.js";
+import {LoginPage} from "@pages/LoginPage.js";
+import {HomePage} from "@pages/HomePage.js";
+
 
 const setupUserDir = 'tests/setup/.state';
 const setupUserAuth = 'tests/setup/.state/user.json';

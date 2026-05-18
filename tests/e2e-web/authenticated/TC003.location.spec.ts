@@ -1,7 +1,7 @@
 import {test} from "@playwright/test";
-import {HomePage} from "@pages/HomePage";
-import {LocationPage} from "@pages/LocationPage";
-import {dismissModalIfPresent} from "@utils/helpers";
+import {HomePage} from "@pages/HomePage.js";
+import {LocationPage} from "@pages/LocationPage.js";
+import {dismissModalIfPresent} from "@utils/helpers.js";
 
 test('Location creation workflow', async ({page}) => {
 

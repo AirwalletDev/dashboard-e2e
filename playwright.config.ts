@@ -1,7 +1,6 @@
 import {defineConfig} from '@playwright/test';
 import {config} from "dotenv";
 
-
 config({path: `.env.${process.env.ENV ?? 'sandbox'}`});
 
 export default defineConfig({

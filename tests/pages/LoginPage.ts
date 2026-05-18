@@ -1,5 +1,5 @@
-import {BasePage} from "@pages/BasePage";
 import {expect} from "@playwright/test";
+import {BasePage} from "@pages/BasePage.js";
 
 export class LoginPage extends BasePage {
 
