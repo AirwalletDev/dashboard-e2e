@@ -13,7 +13,9 @@ export default defineConfig({
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
     workers: '50%',
-    reporter: [['html'], ['list']],
+    reporter: process.env.CI
+        ? [['github'], ['html']]
+        : [['line'], ['html']],
 
     use: {
         channel: 'chrome',
