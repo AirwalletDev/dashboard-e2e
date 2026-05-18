@@ -3,6 +3,10 @@ import {config} from "dotenv";
 
 config({path: `.env.${process.env.ENV ?? 'sandbox'}`});
 
+if (!process.env.BASE_URL) {
+    throw new Error('BASE_URL environment variable is missing');
+}
+
 export default defineConfig({
     testDir: './tests',
     fullyParallel: true,
