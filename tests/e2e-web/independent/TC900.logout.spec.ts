@@ -8,9 +8,9 @@ test('User can successfully log out from Airwallet dashboard', async ({page}) =>
     const staticUser: DashboardUser = {
         firstName: '',
         lastName: '',
-        email: 'zinajda+44@airwallet.net',
-        password: 'Airwallet2026!'
-    };//todo move this to .env.sandbox
+        email: process.env.TEST_USER_EMAIL ?? '',
+        password: process.env.TEST_USER_PASSWORD ?? '',
+    };
     await loginPage.givenUserIsOnSignInPage();
     await loginPage.whenUserFillsInSignInForm(staticUser.email, staticUser.password);
     await loginPage.whenTheUserClicksSignInButton();
