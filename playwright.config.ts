@@ -14,7 +14,7 @@ export default defineConfig({
     retries: process.env.CI ? 1 : 0,
     workers: '50%',
     reporter: process.env.CI
-        ? [['github'], ['html']]
+        ? [['line'], ['github'], ['html']]
         : [['line'], ['html']],
 
     use: {
