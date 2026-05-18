@@ -17,21 +17,26 @@ export class HomePage extends BasePage {
         return this.page.getByRole('button', {name: 'locations icon Locations'});
     }
 
+    private get burgerMenu() {
+        return this.page.locator('.topbar').getByRole('img', {name: 'Burger Icon'})
+    }
+
     // -- Actions -----------------------------------------------------------------
 
     async givenUserIsOnHomePage() {
-        console.log('Given the user is on the Home page');
         await this.navigate('/home')
     }
 
     async thenTheWelcomeMessagesIsShown(message: string) {
-        console.log(`Then the message shown: ${message}`);
         const actualText = await this.textMessage.textContent()
         expect(actualText).toBe(message);
     }
 
     async whenUserClicksMenuItemLocation() {
-        console.log('When user click menu item Locations');
         await this.menuItemLocation.click()
+    }
+
+    async whenUserClicksBurgerMenu() {
+        await this.burgerMenu.click()
     }
 }

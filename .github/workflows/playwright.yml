@@ -23,9 +23,6 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install chrome --with-deps
 
-      - name: Debug BASE_URL
-        run: echo "${#BASE_URL}"
-
       - name: Run tests
         env:
           BASE_URL: ${{ secrets.BASE_URL }}

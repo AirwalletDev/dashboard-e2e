@@ -1,7 +1,7 @@
 import {defineConfig} from '@playwright/test';
 import {config} from "dotenv";
 
-config({path: `.env.${process.env.ENV ?? 'sandbox'}`});
+config({path: `.env.${process.env.ENV ?? 'sandbox'}`, quiet: true});
 
 if (!process.env.BASE_URL) {
     throw new Error('BASE_URL environment variable is missing');
@@ -11,7 +11,7 @@ export default defineConfig({
     testDir: './tests',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
-    retries: process.env.CI ? 2 : 0,
+    retries: process.env.CI ? 1 : 0,
     workers: '50%',
     reporter: [['html'], ['list']],
 
@@ -19,13 +19,9 @@ export default defineConfig({
         channel: 'chrome',
         baseURL: process.env.BASE_URL,
         trace: 'retain-on-failure',
-        screenshot: 'on',
-        video: 'on',
+        screenshot: 'only-on-failure',
+        video: 'retain-on-failure',
         headless: true,
-        viewport: null,
-        launchOptions: {
-            args: ['--start-maximized'],
-        },
     },
 
     projects: [
