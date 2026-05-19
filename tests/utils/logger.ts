@@ -1,4 +1,4 @@
-import {test} from "@playwright/test";
+import { test } from '@playwright/test';
 
 /**
  * Wraps a test action in a named step for Playwright's reporter.

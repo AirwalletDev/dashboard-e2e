@@ -1,5 +1,5 @@
-import {expect, Page} from "@playwright/test";
-import {BasePage} from "@pages/BasePage.js";
+import { expect, Page } from '@playwright/test';
+import { BasePage } from '@pages/BasePage.js';
 
 export class LocationPage extends BasePage {
     constructor(page: Page) {
@@ -13,19 +13,18 @@ export class LocationPage extends BasePage {
     }
 
     private get closeChatButton() {
-        return this.page.getByRole('button', {name: `Close chat`});
+        return this.page.getByRole('button', { name: `Close chat` });
     }
 
     /// -- Actions -----------------------------------------------------------------
 
     async thenTheUserIsOnLocationPage() {
-        await this.waitForPageLoad()
-        await this.waitForUrl('**/locations')
+        await this.waitForPageLoad();
+        await this.waitForUrl('**/locations');
         expect(await this.getTitle()).toContain('Locations');
     }
 
     async whenUserClicksButtonNewLocation() {
         await this.newLocationButton.click();
     }
-
 }

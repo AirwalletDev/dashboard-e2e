@@ -1,28 +1,17 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "esModuleInterop": true,
-    "types": [
-      "node",
-      "@playwright/test"
-    ],
-    "baseUrl": ".",
-    "paths": {
-      "@pages/*": [
-        "tests/pages/*"
-      ],
-      "@utils/*": [
-        "tests/utils/*"
-      ],
-      "@data/*": [
-        "tests/data/*"
-      ],
-      "@setup/*": [
-        "tests/setup/*"
-      ]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "esModuleInterop": true,
+        "types": ["node", "@playwright/test"],
+        "baseUrl": ".",
+        "paths": {
+            "@pages/*": ["tests/pages/*"],
+            "@utils/*": ["tests/utils/*"],
+            "@data/*": ["tests/data/*"],
+            "@setup/*": ["tests/setup/*"]
+        }
     }
-  }
 }

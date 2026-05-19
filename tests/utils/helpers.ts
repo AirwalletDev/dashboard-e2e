@@ -1,5 +1,5 @@
-import {faker} from '@faker-js/faker';
-import {Page} from "@playwright/test";
+import { faker } from '@faker-js/faker';
+import { Page } from '@playwright/test';
 
 export interface DashboardUser {
     firstName: string;
@@ -20,14 +20,13 @@ export function generateUser(): DashboardUser {
     };
 }
 
-
 // --- Helper to dismiss the modal via the specific button ID ---
 export async function dismissModalIfPresent(page: Page): Promise<void> {
     try {
         console.log('Checking for welcome modal(s) to dismiss...');
 
         // 1. Wait for at least one visible button to appear
-        await page.waitForSelector('#dismiss_modal:visible', {timeout: 2000});
+        await page.waitForSelector('#dismiss_modal:visible', { timeout: 2000 });
 
         // 2. Get ALL visible buttons
         const buttons = await page.locator('#dismiss_modal:visible').all();
@@ -37,7 +36,7 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
         for (const button of buttons) {
             // Re-check visibility before clicking, in case clicking the previous one closed this one too
             if (await button.isVisible()) {
-                await button.click({force: true});
+                await button.click({ force: true });
                 console.log('Clicked a dismiss button.');
 
                 // Small pause to let UI react (optional but helpful if animations are overlapping)
@@ -47,7 +46,7 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
 
         // 4. Final Verification: Ensure NO visible buttons remain
         // We use a locator that finds visible buttons and expect the count to be 0
-        await page.locator('#dismiss_modal:visible').waitFor({state: 'detached', timeout: 2000});
+        await page.locator('#dismiss_modal:visible').waitFor({ state: 'detached', timeout: 2000 });
 
         console.log('All welcome modals are gone.');
     } catch (e) {

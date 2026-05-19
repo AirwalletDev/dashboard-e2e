@@ -1,11 +1,10 @@
-import {Page} from "@playwright/test";
+import { Page } from '@playwright/test';
 
 export abstract class BasePage {
-    constructor(protected page: Page) {
-    }
+    constructor(protected page: Page) {}
 
     async waitForPageLoad() {
-        await this.page.waitForLoadState('domcontentloaded')
+        await this.page.waitForLoadState('domcontentloaded');
     }
 
     //browser tab title
@@ -14,7 +13,7 @@ export abstract class BasePage {
     }
 
     async waitForUrl(url: string): Promise<void> {
-        return this.page.waitForURL(url)
+        return this.page.waitForURL(url);
     }
 
     async goto(path: string) {

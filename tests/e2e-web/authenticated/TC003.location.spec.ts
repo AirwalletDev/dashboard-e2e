@@ -1,11 +1,10 @@
-import {test} from "@playwright/test";
-import {HomePage} from "@pages/HomePage.js";
-import {LocationPage} from "@pages/LocationPage.js";
-import {dismissModalIfPresent} from "@utils/helpers.js";
-import {logStep} from "@utils/logger.js";
+import { test } from '@playwright/test';
+import { HomePage } from '@pages/HomePage.js';
+import { LocationPage } from '@pages/LocationPage.js';
+import { dismissModalIfPresent } from '@utils/helpers.js';
+import { logStep } from '@utils/logger.js';
 
-test('Location creation workflow', async ({page}) => {
-
+test('Location creation workflow', async ({ page }) => {
     const homePage = new HomePage(page);
     const locationPage = new LocationPage(page);
 
@@ -20,5 +19,4 @@ test('Location creation workflow', async ({page}) => {
     await logStep('Then the user is on Locations page', () => locationPage.thenTheUserIsOnLocationPage());
 
     await logStep('When the user clicks button New location', () => locationPage.whenUserClicksButtonNewLocation());
-})
-
+});

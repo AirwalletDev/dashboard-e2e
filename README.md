@@ -44,14 +44,14 @@ Open `.env.sandbox` and fill in your values. See [Environment Variables](#enviro
 Environment files follow this naming convention:
 
 | File           | Purpose                               | Committed to Git |
-|----------------|---------------------------------------|------------------|
+| -------------- | ------------------------------------- | ---------------- |
 | `.env.example` | Template showing what variables exist | ✅ Always        |
 | `.env.sandbox` | Sandbox environment values            | ⚠️ Usually not   |
 
 ### Available variables
 
 | Variable   | Description                    | Example                         |
-|------------|--------------------------------|---------------------------------|
+| ---------- | ------------------------------ | ------------------------------- |
 | `BASE_URL` | Base URL of the app under test | `https://sandbox.airwallet.net` |
 | `ENV`      | Environment to run against     | `sandbox`, `staging`            |
 
@@ -133,12 +133,15 @@ airwallet-test-project/
 The suite is split into three Playwright projects:
 
 ### `setup`
+
 Runs first. Signs up a freshly generated user, completes login, and saves browser auth state (cookies + localStorage) to `tests/setup/.state/user.json`.
 
 ### `e2e-chrome-tests`
+
 Authenticated tests under `e2e-web/authenticated/`. Depends on `setup` and automatically receives the saved storageState via the project-level `use.storageState` config — no re-login or boilerplate needed in individual spec files.
 
 ### `independent-tests`
+
 Tests under `e2e-web/independent/`. Does not depend on `setup`. Each test manages its own login using a static pre-existing user kept under `data/testUsers` — useful for flows like logout where you need full control over the auth flow.
 
 ---
@@ -172,15 +175,16 @@ await page.locator('#email').fill(email);
 ```
 
 ### Step logging
+
 Wrap every test action in `logStep()` instead of using `console.log`. It delegates to Playwright's native `test.step()`, so each step appears once in all reporters with proper **pass/fail** status and timing.
 
 ```typescript
-import {test} from '@playwright/test';
-import {logStep} from '@utils/helpers';
-import {HomePage} from '@pages/HomePage';
-import {LocationPage} from '@pages/LocationPage';
+import { test } from '@playwright/test';
+import { logStep } from '@utils/helpers';
+import { HomePage } from '@pages/HomePage';
+import { LocationPage } from '@pages/LocationPage';
 
-test('Location creation workflow', async ({page}) => {
+test('Location creation workflow', async ({ page }) => {
     const homePage = new HomePage(page);
     const locationPage = new LocationPage(page);
 
@@ -189,14 +193,15 @@ test('Location creation workflow', async ({page}) => {
     await logStep('Then the user is on Locations page', () => locationPage.thenTheUserIsOnLocationPage());
 });
 ```
+
 ### Adding a new spec/test
 
 ```typescript
-import {test} from '@playwright/test';
-import {logStep} from '@utils/helpers';
-import {YourPage} from '@pages/YourPage';
+import { test } from '@playwright/test';
+import { logStep } from '@utils/helpers';
+import { YourPage } from '@pages/YourPage';
 
-test('Your test description', async ({page}) => {
+test('Your test description', async ({ page }) => {
     const yourPage = new YourPage(page);
 
     await logStep('Given user is on your page', () => yourPage.givenUserIsOnYourPage());
@@ -208,7 +213,7 @@ test('Your test description', async ({page}) => {
 ### Naming conventions
 
 | What         | Convention                         | Example                           |
-|--------------|------------------------------------|-----------------------------------|
+| ------------ | ---------------------------------- | --------------------------------- |
 | Spec files   | `TC{number}.{feature}.spec.ts`     | `TC003.location.spec.ts`          |
 | Page classes | `{Feature}Page.ts`                 | `LocationPage.ts`                 |
 | Test names   | Full sentence describing behaviour | `'User can successfully log out'` |
@@ -223,7 +228,7 @@ Page methods follow the **Given / When / Then** pattern:
 ### TC number ranges
 
 | Range       | Project             |
-|-------------|---------------------|
+| ----------- | ------------------- |
 | TC001–TC099 | Setup               |
 | TC100–TC899 | Authenticated tests |
 | TC900+      | Independent tests   |
