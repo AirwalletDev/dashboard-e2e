@@ -11,12 +11,16 @@ export interface DashboardUser {
 export function generateUser(): DashboardUser {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
+    const password =
+        faker.string.alpha({ length: 1, casing: 'upper' }) +
+        faker.string.alphanumeric(10) +
+        faker.helpers.arrayElement(['!', '@', '#', '$']);
 
     return {
         firstName,
         lastName,
         email: `${firstName}.${lastName}@test-${Date.now()}.com`.toLowerCase(),
-        password: 'Airwallet2026!', //todo make password generic
+        password: password,
     };
 }
 
