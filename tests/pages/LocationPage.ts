@@ -28,12 +28,4 @@ export class LocationPage extends BasePage {
         await this.newLocationButton.click();
     }
 
-    async whenTheUserClosesChatButton() {
-        try {
-            await this.closeChatButton.click();
-        } catch (e) {
-            console.log('No open chat at the moment.');
-        }
-
-    }
 }

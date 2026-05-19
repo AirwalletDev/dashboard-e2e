@@ -14,7 +14,7 @@ export class HomePage extends BasePage {
     }
 
     private get menuItemLocation() {
-        return this.page.getByRole('button', {name: 'locations icon Locations'});
+        return this.page.locator('.sidebar-section').locator('#nav-locations');
     }
 
     private get burgerMenu() {
@@ -37,6 +37,7 @@ export class HomePage extends BasePage {
     }
 
     async whenUserClicksBurgerMenu() {
+        await expect(this.burgerMenu).toBeAttached()
         await this.burgerMenu.click()
     }
 }
