@@ -6,7 +6,7 @@ End-to-end tests for the Airwallet dashboard, written in [Playwright](https://pl
 
 ## Prerequisites
 
-- Node.js `v18` or higher
+- Node.js `v20` or higher
 - Google Chrome installed
 - Access to an Airwallet environment (sandbox / staging)
 - `@types/node` installed (included in `npm install`)
@@ -139,7 +139,7 @@ Runs first. Signs up a freshly generated user, completes login, and saves browse
 Authenticated tests under `e2e-web/authenticated/`. Depends on `setup` and automatically receives the saved storageState via the project-level `use.storageState` config — no re-login or boilerplate needed in individual spec files.
 
 ### `independent-tests`
-Tests under `e2e-web/independent/`. Does not depend on `setup`. Each test manages its own login using a static pre-existing user — useful for flows like logout where you need full control over the auth flow.
+Tests under `e2e-web/independent/`. Does not depend on `setup`. Each test manages its own login using a static pre-existing user kept under `data/testUsers` — useful for flows like logout where you need full control over the auth flow.
 
 ---
 
@@ -171,17 +171,37 @@ await loginPage.whenUserFillsInSignInForm(email, password);
 await page.locator('#email').fill(email);
 ```
 
+### Step logging
+Wrap every test action in `logStep()` instead of using `console.log`. It delegates to Playwright's native `test.step()`, so each step appears once in all reporters with proper **pass/fail** status and timing.
+
+```typescript
+import {test} from '@playwright/test';
+import {logStep} from '@utils/helpers';
+import {HomePage} from '@pages/HomePage';
+import {LocationPage} from '@pages/LocationPage';
+
+test('Location creation workflow', async ({page}) => {
+    const homePage = new HomePage(page);
+    const locationPage = new LocationPage(page);
+
+    await logStep('Given the user is on Home page', () => homePage.givenUserIsOnHomePage());
+    await logStep('When the user clicks burger menu icon', () => homePage.whenUserClicksBurgerMenu());
+    await logStep('Then the user is on Locations page', () => locationPage.thenTheUserIsOnLocationPage());
+});
+```
 ### Adding a new spec/test
 
 ```typescript
 import {test} from '@playwright/test';
+import {logStep} from '@utils/helpers';
 import {YourPage} from '@pages/YourPage';
 
-test('your test description', async ({page}) => {
+test('Your test description', async ({page}) => {
     const yourPage = new YourPage(page);
-    await yourPage.givenUserIsOnYourPage();
-    await yourPage.whenUserTakesSomeAction();
-    await yourPage.thenSomethingIsVisible();
+
+    await logStep('Given user is on your page', () => yourPage.givenUserIsOnYourPage());
+    await logStep('When user takes some action', () => yourPage.whenUserTakesSomeAction());
+    await logStep('Then something is visible', () => yourPage.thenSomethingIsVisible());
 });
 ```
 
@@ -218,7 +238,7 @@ To replicate CI behaviour locally:
 CI=true npx playwright test
 ```
 
-In CI mode: `forbidOnly` is enabled, retries are set to `2`, and artifacts (screenshots, video, traces) are retained on failure.
+In CI mode: `forbidOnly` is enabled, retries are set to `1`, and artifacts (screenshots, video, traces) are retained on failure.
 
 ---
 
