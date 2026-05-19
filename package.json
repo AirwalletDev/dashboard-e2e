@@ -9,7 +9,8 @@
         "test:debug": "playwright test --debug",
         "test:headed": "playwright test --headed",
         "report": "playwright show-report",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
     },
     "keywords": [],
     "author": "",

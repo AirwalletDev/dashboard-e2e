@@ -235,6 +235,16 @@ Page methods follow the **Given / When / Then** pattern:
 
 ---
 
+## Code Style
+
+This project uses [Prettier](https://prettier.io/) for code formatting. Formatting is enforced in CI — pull requests will fail if code is not formatted.
+
+Before pushing, run:
+
+```bash
+npm run format
+```
+
 ## CI/CD
 
 To replicate CI behaviour locally:
