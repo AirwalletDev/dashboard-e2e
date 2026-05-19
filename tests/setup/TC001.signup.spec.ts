@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import {dismissModalIfPresent, generateUser} from "@utils/helpers.js";
 import {LoginPage} from "@pages/LoginPage.js";
 import {HomePage} from "@pages/HomePage.js";
-import {logStep, logSuccess} from "@utils/logger.js";
+import {logStep} from "@utils/logger.js";
 
 const setupUserDir = 'tests/setup/.state';
 const setupUserAuth = 'tests/setup/.state/user.json';
@@ -23,51 +23,40 @@ test('Create authenticated Airwallet dashboard user', async ({page}) => {
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
 
-    logStep('Create auth state directory');
-    fs.mkdirSync(setupUserDir, {recursive: true});
-
-    logStep('Given the user is on Sign Up page');
-    await loginPage.givenUserIsOnSignUpPage();
-
-    logStep('When user selects Denmark as country');
-    await loginPage.whenUserEntersThisCountry('Denmark');
-
-    logStep('When user selects Individual account type');
-    await loginPage.whenTheUserChecksIndividualType();
-
-    logStep(`When user fills in Sign Up form with email: ${user.email}`);
-    await loginPage.whenUserFillsInSignUpForm(
-        user.email,
-        user.password
-    );
-
-    logStep('When user clicks Sign Up button');
-    await loginPage.whenTheUserClicksButtonSignUp();
-
-    logStep('Then user is redirected to Sign In page');
-    await loginPage.thenTheUserIsOnSignInPage();
-
-    logStep(`When user signs in as ${user.email}`);
-    await loginPage.whenUserFillsInSignInForm(
-        user.email,
-        user.password
-    );
-
-    await loginPage.whenTheUserClicksSignInButton();
-
-    logStep('Dismiss welcome modal if present');
-    await dismissModalIfPresent(page);
-
-    logStep('Then user is on Dashboard page');
-    await loginPage.thenTheUserIsOnDashboardPage();
-
-    logSuccess('Then welcome message is shown');
-    await homePage.thenTheWelcomeMessagesIsShown(
-        'Welcome to Airwallet!'
-    );
-
-    logStep('Save authenticated storage state');
-    await page.context().storageState({
-        path: setupUserAuth,
+    await logStep('Create auth state directory', async () => {
+        fs.mkdirSync(setupUserDir, {recursive: true})
     });
+
+    await logStep('Given the user is on Sign Up page', () => loginPage.givenUserIsOnSignUpPage());
+
+    await logStep('When user selects Denmark as country', () => loginPage.whenUserEntersThisCountry('Denmark'));
+
+    await logStep('When user selects Individual account type', () => loginPage.whenTheUserChecksIndividualType());
+
+    await logStep(`When user fills in Sign Up form with user with this email: ${user.email}`, () => loginPage.whenUserFillsInSignUpForm(
+        user.email,
+        user.password
+    ));
+
+    await logStep('When user clicks Sign Up button', () => loginPage.whenTheUserClicksButtonSignUp());
+
+    await logStep('Then user is redirected to Sign In page', () => loginPage.thenTheUserIsOnSignInPage());
+
+    await logStep(`When user signs in as ${user.email}`, () => loginPage.whenUserFillsInSignInForm(
+        user.email,
+        user.password
+    ));
+
+    await logStep('When the user clicks Sign in button', () => loginPage.whenTheUserClicksSignInButton());
+
+    await logStep('Dismiss welcome modal if present', () => dismissModalIfPresent(page));
+
+    await logStep('Then user is on Home page', () => loginPage.thenTheUserIsOnHomePage());
+
+    await logStep('Then welcome message is shown', () => homePage.thenTheWelcomeMessagesIsShown('Welcome to Airwallet!'));
+
+    await logStep('Save authenticated storage state', async () => {
+            await page.context().storageState({path: setupUserAuth})
+        }
+    );
 });

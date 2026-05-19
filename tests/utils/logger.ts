@@ -1,11 +1,16 @@
-export function logStep(message: string) {
-    console.log(`\n🔹 ${message}`);
-}
+import {test} from "@playwright/test";
 
-export function logSuccess(message: string): void {
-    console.log(`✅ ${message}`);
-}
-
-export function logError(message: string): void {
-    console.log(`❌ ${message}`);
+/**
+ * Wraps a test action in a named step for Playwright's reporter.
+ *
+ * Instead of using console.log (which duplicates output in the terminal),
+ * this delegates to test.step() which integrates natively with all reporters —
+ * line, github, and HTML. Each step appears exactly once, with proper
+ * pass/fail status and timing, and is collapsible in the HTML report.
+ *
+ * Usage:
+ *   await logStep('When user clicks Sign in button', () => loginPage.clickSignIn());
+ */
+export async function logStep(message: string, action: () => Promise<void>) {
+    await test.step(message, action);
 }

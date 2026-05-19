@@ -9,22 +9,16 @@ test('Location creation workflow', async ({page}) => {
     const homePage = new HomePage(page);
     const locationPage = new LocationPage(page);
 
-    logStep('Given the user is on Home page');
-    await homePage.givenUserIsOnHomePage();
+    await logStep('Given the user is on Home page', () => homePage.givenUserIsOnHomePage());
 
-    logStep('Dismiss welcome modal if present');
-    await dismissModalIfPresent(page);
+    await logStep('Dismiss welcome modal if present', () => dismissModalIfPresent(page));
 
-    logStep('When the user clicks burger menu icon');
-    await homePage.whenUserClicksBurgerMenu();
+    await logStep('When the user clicks burger menu icon', () => homePage.whenUserClicksBurgerMenu());
 
-    logStep('When the user clicks menu item Locations');
-    await homePage.whenUserClicksMenuItemLocation();
+    await logStep('When the user clicks menu item Locations', () => homePage.whenUserClicksMenuItemLocation());
 
-    logStep('Then the user is on Locations page');
-    await locationPage.thenTheUserIsOnLocationPage();
+    await logStep('Then the user is on Locations page', () => locationPage.thenTheUserIsOnLocationPage());
 
-    logStep('When the user clicks button New location');
-    await locationPage.whenUserClicksButtonNewLocation();
+    await logStep('When the user clicks button New location', () => locationPage.whenUserClicksButtonNewLocation());
 })
 

@@ -79,7 +79,7 @@ export class LoginPage extends BasePage {
         await this.signUpButton.click()
     }
 
-    async thenTheUserIsOnDashboardPage() {
+    async thenTheUserIsOnHomePage() {
         await this.waitForPageLoad()
         await this.waitForUrl('**/home')
     }

@@ -14,9 +14,8 @@ export default defineConfig({
     retries: process.env.CI ? 1 : 0,
     workers: '50%',
     reporter: process.env.CI
-        ? [['line'], ['github'], ['html']]
+        ? [['github'], ['html']]
         : [['line'], ['html']],
-
     use: {
         channel: 'chrome',
         baseURL: process.env.BASE_URL,

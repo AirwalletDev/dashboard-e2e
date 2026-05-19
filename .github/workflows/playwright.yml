@@ -23,13 +23,10 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install chrome --with-deps
 
-      - name: Run tests
+      - name: Run 🎭 E2E tests
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
-        run: |
-          echo "::group::🎭 E2E Tests"
-          npx playwright test
-          echo "::endgroup::"
+        run: npx playwright test
 
       - name: Upload HTML report
         if: always()
