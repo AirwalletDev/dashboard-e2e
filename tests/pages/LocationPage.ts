@@ -6,7 +6,7 @@ export class LocationPage extends BasePage {
     private readonly locationName: string;
     constructor(page: Page) {
         super(page);
-        this.locationName = faker.company.name();
+        this.locationName = faker.company.name().trim().slice(0, 30);
     }
 
     /// -- Locators -----------------------------------------------------------------

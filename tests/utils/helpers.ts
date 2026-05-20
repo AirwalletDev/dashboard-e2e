@@ -12,9 +12,7 @@ export function generateUser(): DashboardUser {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const password =
-        faker.string.alpha({ length: 1, casing: 'lower' }) +
-        faker.string.alphanumeric(11) +
-        faker.helpers.arrayElement(['!', '@', '#', '$']);
+        faker.string.alpha({ length: 1, casing: 'lower' }) + faker.string.numeric(1) + faker.string.alphanumeric(10);
 
     return {
         firstName,
