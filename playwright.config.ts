@@ -20,7 +20,7 @@ export default defineConfig({
     use: {
         channel: 'chrome',
         baseURL: process.env.BASE_URL,
-        trace: 'on', //todo set to retain-on-failure after setup is tested
+        trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
         headless: true,
