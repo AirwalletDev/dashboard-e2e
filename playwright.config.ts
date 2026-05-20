@@ -9,6 +9,7 @@ if (!process.env.BASE_URL) {
 
 export default defineConfig({
     testDir: './tests',
+    outputDir: 'test-results',
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
@@ -19,7 +20,7 @@ export default defineConfig({
     use: {
         channel: 'chrome',
         baseURL: process.env.BASE_URL,
-        trace: 'retain-on-failure',
+        trace: 'on', //todo set to retain-on-failure after setup is tested
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
         headless: true,
