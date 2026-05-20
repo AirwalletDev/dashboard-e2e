@@ -1,5 +1,6 @@
 import { expect } from '@playwright/test';
 import { BasePage } from '@pages/BasePage.js';
+import { th } from '@faker-js/faker';
 
 export class LoginPage extends BasePage {
     // -- Locators -----------------------------------------------------------------
@@ -75,7 +76,8 @@ export class LoginPage extends BasePage {
     }
 
     async whenTheUserClicksButtonSignUp() {
-        await this.signUpButton.click();
+        await this.signUpButton.waitFor();
+        await this.signUpButton.click({ force: true });
     }
 
     async thenTheUserIsOnHomePage() {

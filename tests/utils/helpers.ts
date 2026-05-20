@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export interface DashboardUser {
     firstName: string;
@@ -12,8 +12,8 @@ export function generateUser(): DashboardUser {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const password =
-        faker.string.alpha({ length: 1, casing: 'upper' }) +
-        faker.string.alphanumeric(10) +
+        faker.string.alpha({ length: 1, casing: 'lower' }) +
+        faker.string.alphanumeric(11) +
         faker.helpers.arrayElement(['!', '@', '#', '$']);
 
     return {
