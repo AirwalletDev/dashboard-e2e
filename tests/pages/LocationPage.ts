@@ -59,7 +59,7 @@ export class LocationPage extends BasePage {
         await this.inputFieldName.fill(this.locationName);
     }
 
-    async whenTheUSerSelectsThisLocationType(type: string) {
+    async whenTheUserSelectsThisLocationType(type: string) {
         await this.locationType.click();
         await this.page.getByRole('option', { name: type }).click();
     }

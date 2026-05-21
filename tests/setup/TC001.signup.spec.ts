@@ -41,7 +41,7 @@ test('Create authenticated Airwallet dashboard user', async ({ page }) => {
     await logStep('Dismiss welcome modal if present', () => dismissModalIfPresent(page));
     await logStep('Then user is on Home page', () => loginPage.thenTheUserIsOnHomePage());
     await logStep('Then welcome message is shown', () =>
-        homePage.thenTheWelcomeMessagesIsShown('Welcome to Airwallet!')
+        homePage.thenTheWelcomeMessageIsShown('Welcome to Airwallet!')
     );
     await logStep('Save authenticated storage state', async () => {
         await page.context().storageState({ path: setupUserAuth });

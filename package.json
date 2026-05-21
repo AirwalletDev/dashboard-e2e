@@ -10,7 +10,9 @@
         "test:headed": "playwright test --headed",
         "report": "playwright show-report",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
     },
     "keywords": [],
     "author": "",
@@ -19,8 +21,10 @@
     "devDependencies": {
         "@playwright/test": "^1.59.1",
         "@types/node": "^25.8.0",
+        "eslint": "^10.4.0",
         "prettier": "^3.8.3",
-        "typescript": "^6.0.3"
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.59.4"
     },
     "dependencies": {
         "@faker-js/faker": "^10.4.0",
