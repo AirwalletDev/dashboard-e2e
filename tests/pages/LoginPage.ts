@@ -1,6 +1,5 @@
 import { expect } from '@playwright/test';
 import { BasePage } from '@pages/BasePage.js';
-import { th } from '@faker-js/faker';
 
 export class LoginPage extends BasePage {
     // -- Locators -----------------------------------------------------------------

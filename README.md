@@ -19,7 +19,7 @@ End-to-end tests for the Airwallet dashboard, written in [Playwright](https://pl
 
 ```bash
 git clone <https://github.com/AirwalletDev/dashboard-e2e>
-cd airwallet-test-project
+cd dashboard-e2e
 npm install
 ```
 
@@ -99,7 +99,7 @@ npx playwright show-report
 ## Project Structure
 
 ```
-airwallet-test-project/
+dashboard-e2e/
 ├── tests/
 │   ├── api/                           # API-level tests (coming soon)
 │   ├── data/                          # Shared test data
@@ -224,6 +224,9 @@ Page methods follow the **Given / When / Then** pattern:
 - `given...` — navigation and preconditions
 - `when...` — user actions
 - `then...` — assertions
+
+### Method naming conventions
+Method names use strict camelCase. Treat acronyms as words: `User`, not `USer`; `Url`, not `URL`. Keep nouns singular when they refer to a single thing: `thenTheWelcomeMessageIsShown`, not `thenTheWelcomeMessagesIsShown`.
 
 ### TC labels
 

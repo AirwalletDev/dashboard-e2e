@@ -26,7 +26,7 @@ export class HomePage extends BasePage {
         await this.navigate('/home');
     }
 
-    async thenTheWelcomeMessagesIsShown(message: string) {
+    async thenTheWelcomeMessageIsShown(message: string) {
         const actualText = await this.textMessage.textContent();
         expect(actualText).toBe(message);
     }
