@@ -6,7 +6,7 @@ End-to-end tests for the Airwallet dashboard, written in [Playwright](https://pl
 
 ## Prerequisites
 
-- Node.js `v20` or higher
+- Node.js `v24` or higher
 - Google Chrome installed
 - Access to an Airwallet environment (sandbox / staging)
 - `@types/node` installed (included in `npm install`)

@@ -24,6 +24,14 @@ export class LoginPage extends BasePage {
         return this.page.getByRole('button', { name: 'Sign in' });
     }
 
+    // private get signInButton() {
+    //     return this.page.getByTestId('auth-submit-button');
+    // }
+
+    private get loader() {
+        return this.page.locator('.app-loading-indicator');
+    }
+
     private get signUpButton() {
         return this.page.getByRole('button', { name: 'Sign up' });
     }
@@ -78,6 +86,7 @@ export class LoginPage extends BasePage {
     async whenTheUserClicksButtonSignUp() {
         await this.signUpButton.waitFor();
         await this.signUpButton.click({ force: true });
+        await this.loader.waitFor({ state: 'hidden' });
     }
 
     async thenTheUserIsOnHomePage() {
@@ -97,6 +106,7 @@ export class LoginPage extends BasePage {
 
     async whenTheUserClicksSignInButton() {
         await this.signInButton.click();
+        await this.loader.waitFor({ state: 'hidden' });
     }
 
     async whenTheUserLogsOutFromDashboard() {

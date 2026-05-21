@@ -56,3 +56,10 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
         console.log('No welcome modal present (or cleared successfully).');
     }
 }
+
+export async function closeChat(page: Page): Promise<void> {
+    const closeChatButton = page.getByRole('button', { name: `Close chat` });
+    if (await closeChatButton.isVisible()) {
+        await closeChatButton.click();
+    }
+}

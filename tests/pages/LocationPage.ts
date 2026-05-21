@@ -15,10 +15,6 @@ export class LocationPage extends BasePage {
         return this.page.locator('#create-location-btn');
     }
 
-    private get closeChatButton() {
-        return this.page.getByRole('button', { name: `Close chat` });
-    }
-
     private get createLocationButton() {
         return this.page.locator('#create-location-modal-btn');
     }
