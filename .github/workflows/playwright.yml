@@ -23,6 +23,9 @@ jobs:
             - name: Check formatting
               run: npm run format:check
 
+            - name: Lint
+              run: npm run lint
+
             - name: Install Playwright browsers
               run: npx playwright install chrome --with-deps
 

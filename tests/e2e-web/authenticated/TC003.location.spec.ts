@@ -22,7 +22,7 @@ test.describe('Location creation workflow', () => {
             );
             await logStep('When the user enters location name', () => locationPage.whenTheUserEntersLocationName());
             await logStep('When the user selects location type', () =>
-                locationPage.whenTheUSerSelectsThisLocationType(locationType)
+                locationPage.whenTheUserSelectsThisLocationType(locationType)
             );
             await logStep('When the user enters number of users', () =>
                 locationPage.whenTheUserEntersNumberOfUsers('10')

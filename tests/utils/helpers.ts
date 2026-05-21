@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { Locator, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export interface DashboardUser {
     firstName: string;
@@ -51,7 +51,7 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
         await page.locator('#dismiss_modal:visible').waitFor({ state: 'detached', timeout: 2000 });
 
         console.log('All welcome modals are gone.');
-    } catch (e) {
+    } catch {
         // If waitForSelector times out, it means 0 modals appeared. This is good.
         console.log('No welcome modal present (or cleared successfully).');
     }
