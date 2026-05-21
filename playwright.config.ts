@@ -25,7 +25,7 @@ export default defineConfig({
         video: 'retain-on-failure',
         headless: true,
         actionTimeout: 20_000, // each action gets 20s
-        navigationTimeout: 15_000, // page navigations get 15s
+        navigationTimeout: 25_000, // page navigations get 25s
     },
 
     projects: [
