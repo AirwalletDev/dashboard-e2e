@@ -82,7 +82,7 @@ npx playwright test --project=e2e-chrome-tests
 npx playwright test --project=independent-tests
 
 # Run a specific spec file
-npx playwright test tests/e2e-web/authenticated/TC003.location.spec.ts
+npx playwright test tests/e2e-web/authenticated/TCA-001-location.spec.ts
 
 # Run headed (see the browser)
 npx playwright test --headed
@@ -105,9 +105,9 @@ airwallet-test-project/
 │   ├── data/                          # Shared test data
 │   ├── e2e-web/
 │   │   ├── authenticated/             # Tests requiring a logged-in user
-│   │   │   └── TC003.location.spec.ts
+│   │   │   └── TCA-001-location.spec.ts
 │   │   └── independent/               # Tests that manage their own auth
-│   │       └── TC900.logout.spec.ts
+│   │       └── TCI-001-logout.spec.ts
 │   ├── pages/                         # Page Object Model classes
 │   │   ├── BasePage.ts
 │   │   ├── HomePage.ts
@@ -116,7 +116,7 @@ airwallet-test-project/
 │   ├── setup/
 │   │   ├── .state/
 │   │   │   └── user.json              # Saved auth state (git-ignored)
-│   │   └── TC001.signup.spec.ts       # Signup + auth state generation
+│   │   └── TCS-001-signup.spec.ts       # Signup + auth state generation
 │   └── utils/
 │       └── helpers.ts                 # Shared utility functions
 ├── .env.example
@@ -150,7 +150,7 @@ Tests under `e2e-web/independent/`. Does not depend on `setup`. Each test manage
 
 The suite uses a **shared auth state** pattern to avoid repeating login steps across tests:
 
-1. `TC001.signup.spec.ts` runs once as the setup step
+1. `TCS-001-signup.spec.ts` runs once as the setup step
 2. It signs up a generated user, logs in, then persists the session to `tests/setup/.state/user.json`
 3. The `e2e-chrome-tests` project injects that state automatically at the project level via `playwright.config.ts`
 
@@ -212,12 +212,12 @@ test('Your test description', async ({ page }) => {
 
 ### Naming conventions
 
-| What         | Convention                         | Example                           |
-| ------------ | ---------------------------------- | --------------------------------- |
-| Spec files   | `TC{number}.{feature}.spec.ts`     | `TC003.location.spec.ts`          |
-| Page classes | `{Feature}Page.ts`                 | `LocationPage.ts`                 |
-| Test names   | Full sentence describing behaviour | `'User can successfully log out'` |
-| Page methods | `given / when / then` prefix       | `givenUserIsOnSignInPage()`       |
+| What         | Convention                               | Example                           |
+| ------------ | ---------------------------------------- | --------------------------------- |
+| Spec files   | `TC{project}-{number}-{feature}.spec.ts` | `TCI-001-location.spec.ts`        |
+| Page classes | `{Feature}Page.ts`                       | `LocationPage.ts`                 |
+| Test names   | Full sentence describing behaviour       | `'User can successfully log out'` |
+| Page methods | `given / when / then` prefix             | `givenUserIsOnSignInPage()`       |
 
 Page methods follow the **Given / When / Then** pattern:
 
@@ -227,11 +227,11 @@ Page methods follow the **Given / When / Then** pattern:
 
 ### TC number ranges
 
-| Range       | Project             |
-| ----------- | ------------------- |
-| TC001–TC099 | Setup               |
-| TC100–TC899 | Authenticated tests |
-| TC900+      | Independent tests   |
+| Range | Project             |
+| ----- | ------------------- |
+| TCS   | Setup               |
+| TCA   | Authenticated tests |
+| TCI   | Independent tests   |
 
 ---
 
