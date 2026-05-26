@@ -32,13 +32,13 @@ export default defineConfig({
         { name: 'setup', testMatch: 'setup/TCS1-signup.spec.ts' },
         {
             name: 'independent-tests',
-            testMatch: '/e2e-web/independent/**',
+            testMatch: 'e2e-web/independent/**',
             // no dependencies, no storageState — uses its own static user
         },
 
         {
             name: 'e2e-chrome-tests',
-            testMatch: '/e2e-web/authenticated/**',
+            testMatch: 'e2e-web/authenticated/**',
             dependencies: ['setup'],
             use: { storageState: 'tests/setup/.state/user.json' },
             //authentication dependency, use storageState to get token

@@ -31,7 +31,7 @@ export class LoginPage extends BasePage {
         return this.page.locator('[data-testid="auth-submit-button"]');
     }
 
-    private get repeatPasswordButton() {
+    private get repeatPasswordInput() {
         return this.page.locator('[data-testid="sign-up-form-repeat-password-input"]');
     }
 
@@ -73,7 +73,7 @@ export class LoginPage extends BasePage {
     async whenUserFillsInSignUpForm(email: string, password: string) {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
-        await this.repeatPasswordButton.fill(password);
+        await this.repeatPasswordInput.fill(password);
         await this.termsAndConditionsCheckbox.click();
         await this.GDPRCheckbox.click();
     }
