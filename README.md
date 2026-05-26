@@ -213,7 +213,7 @@ test('Your test description', async ({ page }) => {
 ### Naming conventions
 
 | What         | Convention                              | Example                           |
-| ------------ | --------------------------------------- |-----------------------------------|
+| ------------ | --------------------------------------- | --------------------------------- |
 | Spec files   | `TC{project}{number}-{feature}.spec.ts` | `TCI1-location.spec.ts`           |
 | Page classes | `{Feature}Page.ts`                      | `LocationPage.ts`                 |
 | Test names   | Full sentence describing behaviour      | `'User can successfully log out'` |
@@ -226,12 +226,13 @@ Page methods follow the **Given / When / Then** pattern:
 - `then...` — assertions
 
 ### Method naming conventions
+
 Method names use strict camelCase. Treat acronyms as words: `User`, not `USer`; `Url`, not `URL`. Keep nouns singular when they refer to a single thing: `thenTheWelcomeMessageIsShown`, not `thenTheWelcomeMessagesIsShown`.
 
 ### TC labels
 
 | Label | Project             |
-|-------| ------------------- |
+| ----- | ------------------- |
 | TCS   | Setup               |
 | TCA   | Authenticated tests |
 | TCI   | Independent tests   |

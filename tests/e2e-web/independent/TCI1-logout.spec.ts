@@ -12,8 +12,8 @@ test('User can successfully log out from Airwallet dashboard', async ({ page }) 
     const staticUser: DashboardUser = {
         firstName: '',
         lastName: '',
-        email: testUsers.user.email,
-        password: testUsers.user.password,
+        email: testUsers.logoutUser.email,
+        password: testUsers.logoutUser.password,
     };
 
     await logStep('Given the user is on Sign In page', () => loginPage.givenUserIsOnSignInPage());

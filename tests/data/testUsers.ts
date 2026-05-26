@@ -1,6 +1,14 @@
+function requireEnv(name: string): string {
+    const value = process.env[name];
+    if (!value) {
+        throw new Error(`${name} environment variable is missing`);
+    }
+    return value;
+}
+
 export const testUsers = {
-    user: {
-        email: 'zinajda+44@airwallet.net',
-        password: 'Airwallet2026!',
+    logoutUser: {
+        email: requireEnv('TEST_USER_EMAIL'),
+        password: requireEnv('TEST_USER_PASSWORD'),
     },
 };

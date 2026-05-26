@@ -29,7 +29,7 @@ export default defineConfig({
     },
 
     projects: [
-        { name: 'setup', testMatch: 'setup/TC001.signup.spec.ts' },
+        { name: 'setup', testMatch: 'setup/TCS1-signup.spec.ts' },
         {
             name: 'independent-tests',
             testMatch: '/e2e-web/independent/**',
@@ -41,7 +41,7 @@ export default defineConfig({
             testMatch: '/e2e-web/authenticated/**',
             dependencies: ['setup'],
             use: { storageState: 'tests/setup/.state/user.json' },
-            //authentication dependency, use storageState to obtain token
+            //authentication dependency, use storageState to get token
         },
     ],
 });

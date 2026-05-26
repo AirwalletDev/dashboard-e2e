@@ -4,11 +4,11 @@ import { BasePage } from '@pages/BasePage.js';
 export class LoginPage extends BasePage {
     // -- Locators -----------------------------------------------------------------
     private get country() {
-        return this.page.getByRole('combobox');
+        return this.page.locator('[data-testid="sign-up-form-country-select"] input');
     }
 
     get individualTypeCheckbox() {
-        return this.page.getByText('Individual person');
+        return this.page.locator('[data-testid="sign-up-form-business-type-individual-radio"] input');
     }
 
     private get emailInput() {
@@ -23,20 +23,16 @@ export class LoginPage extends BasePage {
         return this.page.getByRole('button', { name: 'Sign in' });
     }
 
-    // private get signInButton() {
-    //     return this.page.getByTestId('auth-submit-button');
-    // }
-
     private get loader() {
         return this.page.locator('.app-loading-indicator');
     }
 
     private get signUpButton() {
-        return this.page.getByRole('button', { name: 'Sign up' });
+        return this.page.locator('[data-testid="auth-submit-button"]');
     }
 
     private get repeatPasswordButton() {
-        return this.page.locator('#repeatPassword');
+        return this.page.locator('[data-testid="sign-up-form-repeat-password-input"]');
     }
 
     private get needAccountButton() {
@@ -44,11 +40,11 @@ export class LoginPage extends BasePage {
     }
 
     private get termsAndConditionsCheckbox() {
-        return this.page.locator('#terms_check');
+        return this.page.locator('[data-testid="sign-up-form-terms-checkbox"]');
     }
 
     private get GDPRCheckbox() {
-        return this.page.locator('#gdpr_check');
+        return this.page.locator('[data-testid="sign-up-form-gdpr-checkbox"]');
     }
 
     private get logOutButton() {
@@ -94,7 +90,7 @@ export class LoginPage extends BasePage {
     }
 
     async givenUserIsOnSignInPage() {
-        await this.navigate("'/sign-in'");
+        await this.navigate('/sign-in');
         await expect(this.page).toHaveTitle('Sign in');
     }
 
