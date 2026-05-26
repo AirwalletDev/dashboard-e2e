@@ -66,15 +66,16 @@ CI=true npm test
 ## Environment Setup
 
 1. **Create environment file:**
-   ```bash
-   cp .env.example .env.sandbox
-   ```
+
+    ```bash
+    cp .env.example .env.sandbox
+    ```
 
 2. **Fill in `.env.sandbox`:**
-   - `BASE_URL` — Base URL of the app under test (e.g., `https://sandbox.airwallet.net`)
-   - `ENV` — Environment name (e.g., `sandbox`, `staging`)
-   - `TEST_USER_EMAIL` — Email for static test users (used in independent tests)
-   - `TEST_USER_PASSWORD` — Password for static test users
+    - `BASE_URL` — Base URL of the app under test (e.g., `https://sandbox.airwallet.net`)
+    - `ENV` — Environment name (e.g., `sandbox`, `staging`)
+    - `TEST_USER_EMAIL` — Email for static test users (used in independent tests)
+    - `TEST_USER_PASSWORD` — Password for static test users
 
 3. **Note:** `.env.sandbox` and test state files (`tests/setup/.state/user.json`) are git-ignored.
 
@@ -85,25 +86,25 @@ CI=true npm test
 The suite splits tests into three projects defined in `playwright.config.ts`:
 
 1. **`setup`** (runs first)
-   - File: `tests/setup/TCS1-signup.spec.ts`
-   - Creates a fresh user using `generateUser()` (faker-js)
-   - Completes signup and login flow
-   - Saves browser auth state (cookies + localStorage) to `tests/setup/.state/user.json`
-   - Other projects depend on this
+    - File: `tests/setup/TCS1-signup.spec.ts`
+    - Creates a fresh user using `generateUser()` (faker-js)
+    - Completes signup and login flow
+    - Saves browser auth state (cookies + localStorage) to `tests/setup/.state/user.json`
+    - Other projects depend on this
 
 2. **`e2e-chrome-tests`** (authenticated tests)
-   - Pattern: `tests/e2e-web/authenticated/**`
-   - Depends on `setup` project
-   - Automatically receives saved storageState via project-level config
-   - No re-login needed; just create a spec file and start testing
-   - Label convention: `TCA{number}-{feature}.spec.ts`
+    - Pattern: `tests/e2e-web/authenticated/**`
+    - Depends on `setup` project
+    - Automatically receives saved storageState via project-level config
+    - No re-login needed; just create a spec file and start testing
+    - Label convention: `TCA{number}-{feature}.spec.ts`
 
 3. **`independent-tests`** (self-contained tests)
-   - Pattern: `tests/e2e-web/independent/**`
-   - No dependencies; manages its own login
-   - Uses static pre-existing test users from `tests/data/testUsers.ts`
-   - Useful for logout flows or tests requiring full auth control
-   - Label convention: `TCI{number}-{feature}.spec.ts`
+    - Pattern: `tests/e2e-web/independent/**`
+    - No dependencies; manages its own login
+    - Uses static pre-existing test users from `tests/data/testUsers.ts`
+    - Useful for logout flows or tests requiring full auth control
+    - Label convention: `TCI{number}-{feature}.spec.ts`
 
 ### Code Organization
 
@@ -135,6 +136,7 @@ tests/
 All UI interaction logic lives in page classes (`tests/pages/*.ts`). Specs call page methods, never raw selectors.
 
 **Method naming conventions:**
+
 - `given...()` — navigation and preconditions (e.g., `givenUserIsOnHomePage()`)
 - `when...()` — user actions (e.g., `whenUserClicksBurgerMenu()`)
 - `then...()` — assertions (e.g., `thenTheUserIsOnLocationPage()`)
@@ -159,51 +161,52 @@ await logStep('When user clicks sign in', () => loginPage.whenUserClicksSignIn()
 ## Configuration Files
 
 - **`playwright.config.ts`** — Defines projects, reporters, timeouts, and storage state locations
-  - `actionTimeout: 20s` per action
-  - `navigationTimeout: 25s` for page navigation
-  - `fullyParallel: true` (run tests in parallel)
-  - Workers: 50% of available CPUs
-  - Reporters: `list` (with steps), `html`, and `github` (in CI)
+    - `actionTimeout: 20s` per action
+    - `navigationTimeout: 25s` for page navigation
+    - `fullyParallel: true` (run tests in parallel)
+    - Workers: 50% of available CPUs
+    - Reporters: `list` (with steps), `html`, and `github` (in CI)
 
 - **`tsconfig.json`** — TypeScript configuration
-  - Path aliases: `@pages`, `@utils`, `@data`, `@setup` for imports
-  - Strict mode enabled
-  - Target: ESNext
+    - Path aliases: `@pages`, `@utils`, `@data`, `@setup` for imports
+    - Strict mode enabled
+    - Target: ESNext
 
 - **`eslint.config.js`** — Linting rules
-  - TypeScript recommended rules
-  - Strict camelCase for functions/variables/parameters
-  - StrictPascalCase for types
-  - Unused variable warnings (allow leading underscore)
+    - TypeScript recommended rules
+    - Strict camelCase for functions/variables/parameters
+    - StrictPascalCase for types
+    - Unused variable warnings (allow leading underscore)
 
 - **`.env.example`** — Template for environment variables (committed)
 
 ## Writing New Tests
 
 1. **For authenticated workflows:**
-   - Create a spec file in `tests/e2e-web/authenticated/TCA{number}-{feature}.spec.ts`
-   - Import page objects and `logStep` from utilities
-   - Write Given/When/Then steps; auth is automatic via `storageState`
+    - Create a spec file in `tests/e2e-web/authenticated/TCA{number}-{feature}.spec.ts`
+    - Import page objects and `logStep` from utilities
+    - Write Given/When/Then steps; auth is automatic via `storageState`
 
 2. **For independent/self-auth workflows:**
-   - Create a spec file in `tests/e2e-web/independent/TCI{number}-{feature}.spec.ts`
-   - Log in using a static user from `testUsers.ts`
-   - Auth state is not shared; each test is self-contained
+    - Create a spec file in `tests/e2e-web/independent/TCI{number}-{feature}.spec.ts`
+    - Log in using a static user from `testUsers.ts`
+    - Auth state is not shared; each test is self-contained
 
 3. **Example authenticated test:**
-   ```typescript
-   import { test } from '@playwright/test';
-   import { logStep } from '@utils/logger';
-   import { HomePage } from '@pages/HomePage';
 
-   test('User can navigate to locations', async ({ page }) => {
-       const homePage = new HomePage(page);
+    ```typescript
+    import { test } from '@playwright/test';
+    import { logStep } from '@utils/logger';
+    import { HomePage } from '@pages/HomePage';
 
-       await logStep('Given user is on home page', () => homePage.givenUserIsOnHomePage());
-       await logStep('When user clicks menu', () => homePage.whenUserClicksMenu());
-       await logStep('Then user sees locations link', () => homePage.thenLocationsLinkIsVisible());
-   });
-   ```
+    test('User can navigate to locations', async ({ page }) => {
+        const homePage = new HomePage(page);
+
+        await logStep('Given user is on home page', () => homePage.givenUserIsOnHomePage());
+        await logStep('When user clicks menu', () => homePage.whenUserClicksMenu());
+        await logStep('Then user sees locations link', () => homePage.thenLocationsLinkIsVisible());
+    });
+    ```
 
 ## CI/CD Integration
 
@@ -214,14 +217,16 @@ await logStep('When user clicks sign in', () => loginPage.whenUserClicksSignIn()
 ## Common Patterns
 
 ### Dismissing Modal/Chat
+
 ```typescript
 import { dismissModalIfPresent, closeChat } from '@utils/helpers';
 
-await dismissModalIfPresent(page);  // Closes all welcome modals
-await closeChat(page);              // Closes chat widget
+await dismissModalIfPresent(page); // Closes all welcome modals
+await closeChat(page); // Closes chat widget
 ```
 
 ### Generating Test Data
+
 ```typescript
 import { generateUser } from '@utils/helpers';
 
@@ -230,9 +235,11 @@ const user = generateUser();
 ```
 
 ### Waiting and Navigation
+
 Page classes extend `BasePage` which provides these methods (call on page object instances, not Playwright's `page` fixture):
+
 ```typescript
-await homePage.waitForPageLoad();  // Wait for DOM content
-await homePage.navigate(path);     // Navigate and wait for load
-await homePage.waitForUrl(url);    // Wait for URL match
+await homePage.waitForPageLoad(); // Wait for DOM content
+await homePage.navigate(path); // Navigate and wait for load
+await homePage.waitForUrl(url); // Wait for URL match
 ```
