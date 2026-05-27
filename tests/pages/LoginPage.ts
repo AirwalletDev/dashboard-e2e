@@ -51,6 +51,10 @@ export class LoginPage extends BasePage {
         return this.page.locator('.log-out');
     }
 
+    private get ssoButton() {
+        return this.page.locator('[data-testid="auth-page-saml-sso-button"]');
+    }
+
     // -- Actions -----------------------------------------------------------------
 
     async givenUserIsOnSignUpPage() {
@@ -111,5 +115,10 @@ export class LoginPage extends BasePage {
     async thenTheUserIsOnSignInPage() {
         await this.page.waitForURL('**/sign-in');
         await expect(this.page).toHaveTitle('Sign in');
+    }
+
+    async whenTheUserClicksSamlSSOButton() {
+        await this.ssoButton.click();
+        console.log('Found and clicked SSO button, waiting for popup...');
     }
 }
