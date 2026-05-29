@@ -8,6 +8,7 @@ if (!process.env.BASE_URL) {
 }
 
 export default defineConfig({
+    globalTimeout: 0,
     testDir: './tests',
     outputDir: 'test-results',
     timeout: 120_000,
