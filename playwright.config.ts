@@ -23,6 +23,7 @@ export default defineConfig({
               ['html', { open: 'never' }],
           ],
     use: {
+        channel: 'chrome',
         baseURL: process.env.BASE_URL,
         trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
