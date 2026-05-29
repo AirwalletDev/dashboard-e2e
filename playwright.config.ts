@@ -16,10 +16,12 @@ export default defineConfig({
     retries: process.env.CI ? 1 : 0,
     workers: '50%',
     reporter: process.env.CI
-        ? [['github'], ['html'], ['list', { printSteps: true }]]
-        : [['list', { printSteps: true }], ['html']],
+        ? [['github'], ['html', { open: 'never' }], ['list', { printSteps: true }]]
+        : [
+              ['list', { printSteps: true }],
+              ['html', { open: 'never' }],
+          ],
     use: {
-        channel: 'chrome',
         baseURL: process.env.BASE_URL,
         trace: 'retain-on-failure',
         screenshot: 'only-on-failure',
@@ -38,7 +40,7 @@ export default defineConfig({
         },
 
         {
-            name: 'e2e-chrome-tests',
+            name: 'dependant-tests',
             testMatch: 'e2e-web/authenticated/**',
             dependencies: ['setup'],
             use: { storageState: 'tests/setup/.state/user.json' },
