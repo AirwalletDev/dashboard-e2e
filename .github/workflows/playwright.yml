@@ -28,11 +28,12 @@ jobs:
               run: npm run lint
 
             - name: Install Playwright browsers
-              run: npx playwright install chrome --with-deps
+              run: npx playwright install --with-deps chromium
 
             - name: Run 🎭 E2E tests
               env:
                   BASE_URL: ${{ secrets.BASE_URL }}
+                  PLAYWRIGHT_HTML_OPEN: never
               run: npx playwright test
 
             - name: Upload HTML report
