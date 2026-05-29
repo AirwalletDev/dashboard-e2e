@@ -42,7 +42,7 @@ export default defineConfig({
         },
 
         {
-            name: 'dependant-tests',
+            name: 'dependent-tests',
             testMatch: 'e2e-web/authenticated/**',
             dependencies: ['setup'],
             use: { storageState: 'tests/setup/.state/user.json' },
