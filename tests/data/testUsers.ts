@@ -5,7 +5,17 @@ export const testUsers = {
     },
 
     ssoUser: {
-        email: 'AirwalletCucumber@mortenairwallet.onmicrosoft.com',
-        password: 'Huvu31708611',
+        email: 'testautomation_tm@mortenairwallet.onmicrosoft.com',
+        password: 'Nasu2342371',
+    },
+
+    dashboardOwner_1: {
+        email: 'testautomation_1@mortenairwallet.onmicrosoft.com',
+        password: 'Hocu1416851',
+    },
+
+    dashboardOwner_2: {
+        email: 'testautomation_2@mortenairwallet.onmicrosoft.com',
+        password: 'Kuwu0345051',
     },
 };

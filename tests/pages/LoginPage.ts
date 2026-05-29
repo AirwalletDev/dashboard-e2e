@@ -1,7 +1,11 @@
-import { expect } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { BasePage } from '@pages/BasePage.js';
 
 export class LoginPage extends BasePage {
+    constructor(page: Page) {
+        super(page);
+    }
+
     // -- Locators -----------------------------------------------------------------
     private get country() {
         return this.page.locator('[data-testid="sign-up-form-country-select"] input');
@@ -117,8 +121,33 @@ export class LoginPage extends BasePage {
         await expect(this.page).toHaveTitle('Sign in');
     }
 
-    async whenTheUserClicksSamlSSOButton() {
+    async whenUserPerformsSsoLogin(email: string, password: string) {
+        const popupPromise = this.page.waitForEvent('popup');
+
+        await this.ssoButton.waitFor({ state: 'visible' });
         await this.ssoButton.click();
         console.log('Found and clicked SSO button, waiting for popup...');
+
+        const popup = await popupPromise;
+        await popup.waitForLoadState();
+
+        await popup.locator('input[type="email"]').waitFor({ state: 'visible', timeout: 10000 });
+        await popup.locator('input[type="email"]').fill(email);
+        await popup.locator('input[type="submit"], button:has-text("Next")').click({ timeout: 10000 });
+
+        await popup.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 10000 });
+        await popup.locator('input[type="password"]').fill(password);
+        await popup.locator('input[type="submit"], button:has-text("Sign in")').click({ timeout: 10000 });
+
+        try {
+            await popup.locator('#idBtn_Back, button:has-text("No")').click({ timeout: 5000 });
+        } catch {
+            // KMSI prompt did not appear
+        }
+        await this.page.waitForResponse(/.*owners/);
+    }
+
+    async thenUserIsLoggedInSuccessfully() {
+        await expect(this.page).toHaveURL(/.*\/(home|locations)/);
     }
 }

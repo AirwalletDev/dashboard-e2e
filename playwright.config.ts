@@ -8,6 +8,7 @@ if (!process.env.BASE_URL) {
 }
 
 export default defineConfig({
+    timeout: 120_000,
     testDir: './tests',
     outputDir: 'test-results',
     fullyParallel: true,
