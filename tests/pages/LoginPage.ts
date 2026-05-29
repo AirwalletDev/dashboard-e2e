@@ -144,7 +144,7 @@ export class LoginPage extends BasePage {
         } catch {
             // KMSI prompt did not appear
         }
-        await this.page.waitForResponse(/.*owners/, { timeout: 30_000 });
+        await this.page.waitForResponse(/.*owners/);
     }
 
     async thenUserIsLoggedInSuccessfully() {
