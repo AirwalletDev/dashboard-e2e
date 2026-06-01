@@ -89,11 +89,6 @@ export class LocationPage extends BasePage {
         await expect(row).toBeVisible();
     }
 
-    async whenUserNavigatesToLocationsViaNav() {
-        await this.page.click('#nav-locations');
-        await this.waitForUrl('**/locations');
-    }
-
     async thenLocationIsVisible(locationName: string) {
         await expect(this.page.getByText(locationName).first()).toBeVisible({ timeout: 10000 });
     }

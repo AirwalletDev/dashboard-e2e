@@ -23,7 +23,6 @@ test('User can successfully log out from Airwallet dashboard', async ({ page }) 
     await logStep(`When user clicks Sign in button`, () => loginPage.whenTheUserClicksSignInButton());
     await logStep('Then the user is on Home page', () => loginPage.thenTheUserIsOnHomePage());
     await logStep('Dismiss welcome modal if present', () => dismissModalIfPresent(page));
-    await logStep('When the user clicks burger menu icon', () => homePage.whenUserClicksBurgerMenu());
-    await logStep('When the user logs out from dashboard', () => loginPage.whenTheUserLogsOutFromDashboard());
+    await logStep('When the user logs out from dashboard', () => homePage.whenTheUserLogsOutFromDashboard());
     await logStep('Then the user is on Sign In page', () => loginPage.thenTheUserIsOnSignInPage());
 });

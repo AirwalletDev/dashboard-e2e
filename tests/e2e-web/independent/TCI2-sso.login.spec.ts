@@ -27,7 +27,6 @@ test('User can log in via SSO, delete account, re-login, and switch between owne
     await logStep('When user logs in via SSO again', () => loginPage.whenUserPerformsSsoLogin(email, password));
     await logStep('Then user is logged in successfully', () => loginPage.thenUserIsLoggedInSuccessfully());
     await logStep('Dismiss welcome modal if present', () => dismissModalIfPresent(page));
-    await logStep('When the user clicks burger menu icon', () => homePage.whenUserClicksBurgerMenu());
 
     await logStep('When user switches owner to testautomation_2', () =>
         homePage.whenUserSwitchesOwnerTo(testUsers.dashboardOwner_2.email)
@@ -37,7 +36,6 @@ test('User can log in via SSO, delete account, re-login, and switch between owne
         locationPage.thenLocationIsVisible('Nyborgvej - Bosch Washer')
     );
 
-    await logStep('When the user clicks burger menu icon', () => homePage.whenUserClicksBurgerMenu());
     await logStep('When user switches owner to testautomation_1', () =>
         homePage.whenUserSwitchesOwnerTo(testUsers.dashboardOwner_1.email)
     );

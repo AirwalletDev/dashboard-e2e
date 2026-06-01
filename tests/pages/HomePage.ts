@@ -13,7 +13,7 @@ export class HomePage extends BasePage {
     }
 
     private get menuItemLocation() {
-        return this.page.locator('.sidebar-section').locator('#nav-locations');
+        return this.page.locator('[data-testid="nav-sidebar-locations-link"]');
     }
 
     private get burgerMenu() {
@@ -21,11 +21,15 @@ export class HomePage extends BasePage {
     }
 
     private get ownerSelector() {
-        return this.page.locator('[data-testid="nav-sidebar-owner-selector"] button');
+        return this.page.locator('[data-testid="nav-sidebar-owner-selector-trigger-button"]');
     }
 
     private get optionsPanel() {
         return this.page.locator('.options-panel');
+    }
+
+    private get logOutButton() {
+        return this.page.locator('[data-testid="nav-sidebar-log-out-link"]');
     }
 
     // -- Actions -----------------------------------------------------------------
@@ -60,5 +64,9 @@ export class HomePage extends BasePage {
 
     async whenUserWaitsForAccountSwitch() {
         await this.page.waitForURL('**/locations'); // wait for the redirect to finish
+    }
+
+    async whenTheUserLogsOutFromDashboard() {
+        await this.logOutButton.click();
     }
 }

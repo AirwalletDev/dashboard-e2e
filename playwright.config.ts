@@ -31,6 +31,11 @@ export default defineConfig({
         headless: true,
         actionTimeout: 20_000, // each action gets 20s
         navigationTimeout: 25_000, // page navigations get 25s
+        launchOptions: { args: ['--start-maximized'] },
+        viewport: {
+            width: 1920,
+            height: 1080,
+        },
     },
 
     projects: [

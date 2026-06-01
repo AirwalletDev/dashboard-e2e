@@ -51,10 +51,6 @@ export class LoginPage extends BasePage {
         return this.page.locator('[data-testid="sign-up-form-gdpr-checkbox"]');
     }
 
-    private get logOutButton() {
-        return this.page.locator('.log-out');
-    }
-
     private get ssoButton() {
         return this.page.locator('[data-testid="auth-page-saml-sso-button"]');
     }
@@ -110,10 +106,6 @@ export class LoginPage extends BasePage {
     async whenTheUserClicksSignInButton() {
         await this.signInButton.click();
         await this.loader.waitFor({ state: 'hidden' });
-    }
-
-    async whenTheUserLogsOutFromDashboard() {
-        await this.logOutButton.click();
     }
 
     async thenTheUserIsOnSignInPage() {
