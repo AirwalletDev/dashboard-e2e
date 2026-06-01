@@ -88,4 +88,12 @@ export class LocationPage extends BasePage {
         const row = this.page.locator('row', { hasText: this.locationName });
         await expect(row).toBeVisible();
     }
+
+    async thenLocationIsVisible(locationName: string) {
+        await expect(this.page.getByText(locationName).first()).toBeVisible({ timeout: 10000 });
+    }
+
+    async thenLocationIsNotVisible(locationName: string) {
+        await expect(this.page.getByText(locationName)).not.toBeVisible();
+    }
 }

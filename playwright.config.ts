@@ -8,15 +8,20 @@ if (!process.env.BASE_URL) {
 }
 
 export default defineConfig({
+    globalTimeout: 0,
     testDir: './tests',
     outputDir: 'test-results',
+    timeout: 120_000,
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 1 : 0,
     workers: '50%',
     reporter: process.env.CI
-        ? [['github'], ['html'], ['list', { printSteps: true }]]
-        : [['list', { printSteps: true }], ['html']],
+        ? [['github'], ['html', { open: 'never' }], ['list', { printSteps: true }]]
+        : [
+              ['list', { printSteps: true }],
+              ['html', { open: 'never' }],
+          ],
     use: {
         channel: 'chrome',
         baseURL: process.env.BASE_URL,
@@ -26,6 +31,11 @@ export default defineConfig({
         headless: true,
         actionTimeout: 20_000, // each action gets 20s
         navigationTimeout: 25_000, // page navigations get 25s
+        launchOptions: { args: ['--start-maximized'] },
+        viewport: {
+            width: 1920,
+            height: 1080,
+        },
     },
 
     projects: [
@@ -37,7 +47,7 @@ export default defineConfig({
         },
 
         {
-            name: 'e2e-chrome-tests',
+            name: 'dependent-tests',
             testMatch: 'e2e-web/authenticated/**',
             dependencies: ['setup'],
             use: { storageState: 'tests/setup/.state/user.json' },

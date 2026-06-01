@@ -13,11 +13,23 @@ export class HomePage extends BasePage {
     }
 
     private get menuItemLocation() {
-        return this.page.locator('.sidebar-section').locator('#nav-locations');
+        return this.page.locator('[data-testid="nav-sidebar-locations-link"]');
     }
 
     private get burgerMenu() {
         return this.page.locator('.topbar').getByRole('img', { name: 'Burger Icon' });
+    }
+
+    private get ownerSelector() {
+        return this.page.locator('[data-testid="nav-sidebar-owner-selector-trigger-button"]');
+    }
+
+    private get optionsPanel() {
+        return this.page.locator('.options-panel');
+    }
+
+    private get logOutButton() {
+        return this.page.locator('[data-testid="nav-sidebar-log-out-link"]');
     }
 
     // -- Actions -----------------------------------------------------------------
@@ -38,5 +50,23 @@ export class HomePage extends BasePage {
     async whenUserClicksBurgerMenu() {
         await expect(this.burgerMenu).toBeAttached();
         await this.burgerMenu.click();
+    }
+
+    async whenUserSwitchesOwnerTo(ownerEmail: string) {
+        await expect(this.ownerSelector).toBeVisible();
+        await this.ownerSelector.click();
+        await this.optionsPanel.waitFor({ state: 'visible' });
+        const option = this.optionsPanel.locator('.option').filter({ hasText: ownerEmail }).first();
+        await expect(option).toBeVisible();
+        await option.scrollIntoViewIfNeeded();
+        await option.click();
+    }
+
+    async whenUserWaitsForAccountSwitch() {
+        await this.page.waitForURL('**/locations'); // wait for the redirect to finish
+    }
+
+    async whenTheUserLogsOutFromDashboard() {
+        await this.logOutButton.click();
     }
 }

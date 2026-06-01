@@ -28,7 +28,7 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
         console.log('Checking for welcome modal(s) to dismiss...');
 
         // 1. Wait for at least one visible button to appear
-        await page.waitForSelector('#dismiss_modal:visible', { timeout: 2000 });
+        await page.waitForSelector('#dismiss_modal:visible', { timeout: 5000 });
 
         // 2. Get ALL visible buttons
         const buttons = await page.locator('#dismiss_modal:visible').all();
@@ -48,7 +48,7 @@ export async function dismissModalIfPresent(page: Page): Promise<void> {
 
         // 4. Final Verification: Ensure NO visible buttons remain
         // We use a locator that finds visible buttons and expect the count to be 0
-        await page.locator('#dismiss_modal:visible').waitFor({ state: 'detached', timeout: 2000 });
+        await page.locator('#dismiss_modal:visible').waitFor({ state: 'detached', timeout: 5000 });
 
         console.log('All welcome modals are gone.');
     } catch {
