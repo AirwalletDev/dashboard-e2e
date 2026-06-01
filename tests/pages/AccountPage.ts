@@ -12,7 +12,7 @@ export class AccountPage extends BasePage {
     }
 
     private get confirmDeleteButton() {
-        return this.page.locator('#confirm-delete');
+        return this.page.locator('[data-testid="delete-confirm-modal-confirm-button"]');
     }
 
     // -- Actions -----------------------------------------------------------------
